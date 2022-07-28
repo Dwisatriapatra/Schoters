@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.HomeFragment">
+    tools:context=".view.fragment.HomeFragment"
+    android:padding="10dp">
 
-    <!-- TODO: Update blank fragment layout -->
+    <SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/home_search_view"
+        android:layout_alignParentTop="true"
+        android:iconifiedByDefault="true"
+        android:queryHint="Masukkan keyword"
+        android:queryBackground="@null"
+        android:background="@drawable/custom_search_view_layout"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
-</FrameLayout>
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:id="@+id/jumlah_hasil_pencarian"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@id/home_search_view" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rv_news"
+        android:layout_below="@id/jumlah_hasil_pencarian"/>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:id="@+id/home_progress_bar"
+        android:layout_centerInParent="true"/>
+</RelativeLayout>

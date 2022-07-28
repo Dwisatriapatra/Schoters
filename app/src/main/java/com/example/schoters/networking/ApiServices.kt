@@ -2,18 +2,15 @@ package com.example.schoters.networking
 
 import com.example.schoters.model.GetAllNewsByKeywordResponse
 import retrofit2.Call
-import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
-import retrofit2.http.Header
+import retrofit2.http.Query
 
 interface ApiServices {
 
     // endpoint: everything
     @GET("everything")
-    @FormUrlEncoded
     fun getNewsByKeyword(
-        @Header("apiKey") apiKey: String,
-        @Header("q") keyword: String
+        @Query("q") keyword: String,
+        @Query("apiKey") apiKey: String
     ) : Call<GetAllNewsByKeywordResponse>
-
 }
