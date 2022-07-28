@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object SchootersAppModule {
+object SchotersAppModule {
     private const val BASE_URL = "https://newsapi.org/v2/"
 
     private val logging: HttpLoggingInterceptor
