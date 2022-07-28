@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.core.os.bundleOf
+import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.schoters.BuildConfig
 import com.example.schoters.R
@@ -35,11 +38,13 @@ class HomeFragment : Fragment() {
     private fun initView() {
         // init adapter
         newsAdapter = NewsAdapter {
-
+            val bundle = bundleOf("news_data" to it)
+            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_detailFragment, bundle)
         }
         rv_news.layoutManager = LinearLayoutManager(requireContext())
         rv_news.adapter = newsAdapter
 
+        // search action, set data to adapter
         val viewModelNews = ViewModelProvider(this)[NewsViewModel::class.java]
         home_search_view.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -47,8 +52,9 @@ class HomeFragment : Fragment() {
                 viewModelNews.getAllNewsByKeyword(BuildConfig.API_KEY, query!!)
                 viewModelNews.newsByKeyword.observe(viewLifecycleOwner){response ->
                     jumlah_hasil_pencarian.text = "Hasil pencarian: ${response.totalResults}"
-                    newsAdapter.setListNewsData(response.articles)
+                    newsAdapter.setListNewsData(response.articles!!)
                     newsAdapter.notifyDataSetChanged()
+                    home_enter_keyword.isInvisible = true
                 }
                 return false
             }

@@ -28,10 +28,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/rv_news"
         android:layout_below="@id/jumlah_hasil_pencarian"/>
-    <ProgressBar
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:id="@+id/home_progress_bar"
-        android:layout_centerInParent="true"/>
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="@string/please_enter_a_keyword"
+        android:id="@+id/home_enter_keyword"
+        android:layout_marginBottom="20dp"
+        android:layout_centerInParent="true" />
 </RelativeLayout>

@@ -55,7 +55,7 @@ dependencies {
     // library GSON
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
-    //library OKHTTP
+    // library OKHTTP
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
 
     // Glide library
@@ -71,4 +71,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0'
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.0"
+
+    // lottie animation
+    implementation "com.airbnb.android:lottie:5.2.0"
 }
