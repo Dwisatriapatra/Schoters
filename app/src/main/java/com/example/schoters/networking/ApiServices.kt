@@ -12,5 +12,5 @@ interface ApiServices {
     fun getNewsByKeyword(
         @Query("q") keyword: String,
         @Query("apiKey") apiKey: String
-    ) : Call<GetAllNewsByKeywordResponse>
+    ): Call<GetAllNewsByKeywordResponse>
 }

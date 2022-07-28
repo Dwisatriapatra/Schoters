@@ -12,19 +12,19 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class NewsViewModel @Inject constructor(apiServices: ApiServices) : ViewModel(){
+class NewsViewModel @Inject constructor(apiServices: ApiServices) : ViewModel() {
     private val liveDataNewsByKeyword = MutableLiveData<GetAllNewsByKeywordResponse>()
-    val newsByKeyword : LiveData<GetAllNewsByKeywordResponse> = liveDataNewsByKeyword
+    val newsByKeyword: LiveData<GetAllNewsByKeywordResponse> = liveDataNewsByKeyword
     private val api = apiServices
 
-    fun getAllNewsByKeyword(apiKey: String, keyword: String){
+    fun getAllNewsByKeyword(apiKey: String, keyword: String) {
         api.getNewsByKeyword(keyword, apiKey)
-            .enqueue(object: Callback<GetAllNewsByKeywordResponse> {
+            .enqueue(object : Callback<GetAllNewsByKeywordResponse> {
                 override fun onResponse(
                     call: Call<GetAllNewsByKeywordResponse>,
                     response: Response<GetAllNewsByKeywordResponse>
                 ) {
-                    if(response.isSuccessful){
+                    if (response.isSuccessful) {
                         liveDataNewsByKeyword.value = response.body()
                     }
                 }

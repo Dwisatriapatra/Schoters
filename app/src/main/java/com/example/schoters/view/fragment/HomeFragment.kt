@@ -39,18 +39,19 @@ class HomeFragment : Fragment() {
         // init adapter
         newsAdapter = NewsAdapter {
             val bundle = bundleOf("news_data" to it)
-            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_detailFragment, bundle)
+            Navigation.findNavController(requireView())
+                .navigate(R.id.action_homeFragment_to_detailFragment, bundle)
         }
         rv_news.layoutManager = LinearLayoutManager(requireContext())
         rv_news.adapter = newsAdapter
 
         // search action, set data to adapter
         val viewModelNews = ViewModelProvider(this)[NewsViewModel::class.java]
-        home_search_view.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+        home_search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 home_search_view.clearFocus()
                 viewModelNews.getAllNewsByKeyword(BuildConfig.API_KEY, query!!)
-                viewModelNews.newsByKeyword.observe(viewLifecycleOwner){response ->
+                viewModelNews.newsByKeyword.observe(viewLifecycleOwner) { response ->
                     jumlah_hasil_pencarian.text = "Hasil pencarian: ${response.totalResults} hasil"
                     newsAdapter.setListNewsData(response.articles!!)
                     newsAdapter.notifyDataSetChanged()
@@ -60,10 +61,11 @@ class HomeFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                if(newText!!.isNotEmpty()){
+                if (newText!!.isNotEmpty()) {
                     viewModelNews.getAllNewsByKeyword(BuildConfig.API_KEY, newText)
-                    viewModelNews.newsByKeyword.observe(viewLifecycleOwner){response ->
-                        jumlah_hasil_pencarian.text = "Hasil pencarian: ${response.totalResults} hasil"
+                    viewModelNews.newsByKeyword.observe(viewLifecycleOwner) { response ->
+                        jumlah_hasil_pencarian.text =
+                            "Hasil pencarian: ${response.totalResults} hasil"
                         newsAdapter.setListNewsData(response.articles!!)
                         newsAdapter.notifyDataSetChanged()
                         home_enter_keyword.isInvisible = true
