@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
                 home_search_view.clearFocus()
                 viewModelNews.getAllNewsByKeyword(BuildConfig.API_KEY, query!!)
                 viewModelNews.newsByKeyword.observe(viewLifecycleOwner){response ->
-                    jumlah_hasil_pencarian.text = "Hasil pencarian: ${response.totalResults}"
+                    jumlah_hasil_pencarian.text = "Hasil pencarian: ${response.totalResults} hasil"
                     newsAdapter.setListNewsData(response.articles!!)
                     newsAdapter.notifyDataSetChanged()
                     home_enter_keyword.isInvisible = true
@@ -60,7 +60,16 @@ class HomeFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                return false
+                if(newText!!.isNotEmpty()){
+                    viewModelNews.getAllNewsByKeyword(BuildConfig.API_KEY, newText)
+                    viewModelNews.newsByKeyword.observe(viewLifecycleOwner){response ->
+                        jumlah_hasil_pencarian.text = "Hasil pencarian: ${response.totalResults} hasil"
+                        newsAdapter.setListNewsData(response.articles!!)
+                        newsAdapter.notifyDataSetChanged()
+                        home_enter_keyword.isInvisible = true
+                    }
+                }
+                return true
             }
 
         })
