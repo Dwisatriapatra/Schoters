@@ -65,7 +65,7 @@ class HomeFragment : Fragment() {
                     viewModelNews.getAllNewsByKeyword(BuildConfig.API_KEY, newText)
                     viewModelNews.newsByKeyword.observe(viewLifecycleOwner) { response ->
                         jumlah_hasil_pencarian.text =
-                            "Hasil pencarian: ${response.totalResults} hasil"
+                            "Search result: ${response.totalResults} result"
                         newsAdapter.setListNewsData(response.articles!!)
                         newsAdapter.notifyDataSetChanged()
                         home_enter_keyword.isInvisible = true
